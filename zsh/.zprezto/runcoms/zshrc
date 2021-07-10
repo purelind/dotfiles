@@ -45,6 +45,9 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 
+export EDITOR='vim'
+export VISUAL='vim'
+
 # Remap clear-screen since ^L is taken by tmux-vim
 bindkey "^O" clear-screen
 bindkey "^L" end-of-line
