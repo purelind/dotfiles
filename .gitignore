@@ -1,0 +1,12 @@
+# OS & IDE
+.DS_Store
+.idea
+
+# profile
+rime/build
+rime/sync
+rime/installation.yaml
+rime/user.yaml
+
+# user db
+rime/*.userdb
