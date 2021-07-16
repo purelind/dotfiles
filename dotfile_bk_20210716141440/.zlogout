@@ -1,1 +1,0 @@
-/Users/akita/.zprezto/runcoms/zlogout

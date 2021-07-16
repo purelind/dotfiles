@@ -1,1 +1,0 @@
-Playground/dotfiles/zsh/.p10k.zsh
