@@ -107,16 +107,31 @@ pull_repo $HOME/.zsh/fast-syntax-highlighting
 NVIM=$HOME/.neovim
 mkdir -p $NVIM
 
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo ${machine}
 # AppImage in case the computer does not have a fallback nvim (appimage does not self update)
 if command -v nvim > /dev/null; then
     echo "NVIM appears to be installed"
 else
     mkdir -p $NVIM/bin
     cd $NVIM/bin
-    curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz
-    tar xzvf nvim-macos.tar.gz
-    cp ./nvim-osx64/bin/nvim nvim
-    chmod u+x nvim
+
+    if [[ $machine == "Mac" ]] {
+        brew install nvim
+    } else {
+        # curl -LO https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-macos.tar.gz
+        # tar xzvf nvim-macos.tar.gz
+        # cp ./nvim-osx64/bin/nvim nvim
+        # chmod u+x nvim
+    }
     cd -
 fi
 
