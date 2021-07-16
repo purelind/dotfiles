@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-pomo -d 52 -b 13 "$@"
