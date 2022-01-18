@@ -23,3 +23,10 @@ node_modules
 
 # RSA keys, just in case
 *rsa*
+
+# idea
+.DS_Store
+*idea
+*.iml
+
+.gradle

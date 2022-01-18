@@ -41,7 +41,7 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
-setopt HIST_IGNORE_SPACE 
+setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 
@@ -106,3 +106,8 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+export PATH=/Users/mori/.tiup/bin:$PATH
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/mori/.sdkman"
+[[ -s "/Users/mori/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/mori/.sdkman/bin/sdkman-init.sh"
