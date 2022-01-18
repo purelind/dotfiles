@@ -8,11 +8,7 @@ mkdir $OLD_DOTFILES
 function backup_if_exists() {
     if [ -f $1 ];
     then
-      mv $1 $OLD_DOTFILES
-    fi
-    if [ -d $1 ];
-    then
-      mv $1 $OLD_DOTFILES
+      cp -rp $1 $OLD_DOTFILES
     fi
 }
 
@@ -96,7 +92,8 @@ mkdir -p $HOME/.zsh
 
 # Fast syntax highlighting
 if [[ ! -d $HOME/.zsh/fast-syntax-highlighting ]]; then
-    git clone https://github.com/zdharma/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
+    # git clone https://github.com/zdharma/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
+    git clone git@github.com:purelind/fast-syntax-highlighting.git $HOME/.zsh/fast-syntax-highlighting
 fi
 pull_repo $HOME/.zsh/fast-syntax-highlighting
 
@@ -169,3 +166,14 @@ for crate in bat fd-find ripgrep exa tealdeer procs ytop hyperfine bandwhich
 do
     $HOME/.cargo/bin/cargo install $crate
 done
+
+#######################
+# GO
+#######################
+if [[ ! -d $HOME/.go ]]; then
+    mkdir -p $HOME/.go
+    curl -LO https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
+    tar -C $HOME/.go -xzf go1.17.6.linux-amd64.tar.gz --strip-components=1
+    rm -f go1.17.6.linux-amd64.tar.gz
+
+fi
