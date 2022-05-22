@@ -162,10 +162,20 @@ if [[ ! -d $HOME/.rustup ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-for crate in bat fd-find ripgrep exa tealdeer procs ytop hyperfine bandwhich
+for crate in bat fd-find ripgrep tealdeer procs ytop hyperfine bandwhich
 do
     $HOME/.cargo/bin/cargo install $crate
 done
+# workaroud for exa
+# cargo install exa failed in debian-11  (20220522)
+# issue : https://github.com/ogham/exa/issues/1068
+for crate in exa
+do
+    $HOME/.cargo/bin/rustup override set 1.56.1
+    $HOME/.cargo/bin/cargo install $crate
+    $HOME/.cargo/bin/rustup override unset
+done
+
 
 #######################
 # GO
