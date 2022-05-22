@@ -180,10 +180,32 @@ done
 #######################
 # GO
 #######################
-if [[ ! -d $HOME/.go ]]; then
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo ${machine}
+if [[ $machine == "Linux" ]]; then
+    if [[ ! -d $HOME/.go ]]; then
     mkdir -p $HOME/.go
-    curl -LO https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
-    tar -C $HOME/.go -xzf go1.17.6.linux-amd64.tar.gz --strip-components=1
-    rm -f go1.17.6.linux-amd64.tar.gz
-
+    curl -LO https://go.dev/dl/go1.17.10.linux-amd64.tar.gz
+    tar -C $HOME/.go -xzf go1.17.10.linux-amd64.tar.gz --strip-components=1
+    rm -f go1.17.10.linux-amd64.tar.gz
+    fi
+    if [[ ! -d $HOME/sdk/go1.18.2 ]]; then
+        mkdir -p $HOME/sdk/go1.18.2
+        curl -LO https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
+        tar -C $HOME/sdk/go1.18.2 -xzf go1.18.2.linux-amd64.tar.gz --strip-components=1
+        rm -f go1.18.2.linux-amd64.tar.gz
+    fi
+    if [[ ! -d $HOME/sdk/go1.16.15 ]]; then
+        mkdir -p $HOME/sdk/go1.16.15
+        curl -LO https://go.dev/dl/go1.16.15.linux-amd64.tar.gz
+        tar -C $HOME/sdk/go1.18.2 -xzf go1.16.15.linux-amd64.tar.gz --strip-components=1
+        rm -f go1.16.15.linux-amd64.tar.gz
+    fi
 fi
