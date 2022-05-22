@@ -124,10 +124,9 @@ else
     if [[ $machine == "Mac" ]] {
         brew install nvim
     } else {
-        # curl -LO https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-macos.tar.gz
-        # tar xzvf nvim-macos.tar.gz
-        # cp ./nvim-osx64/bin/nvim nvim
-        # chmod u+x nvim
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        chmod u+x nvim.appimage
+        mv nvim.appimage nvim
     }
     cd -
 fi
