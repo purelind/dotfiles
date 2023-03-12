@@ -24,8 +24,23 @@ Purelind dotfile (MacOS & Linux)
 
 其中大部分配置来源于 [Jose Javier Gonzalez dotfiles](https://github.com/jjgo/dotfiles)
 
+
+
+
 Usage
+1. install `zsh`, set zsh as your default shell
+2. install 'stow'
+fedora
 ```shell
-bash shell_setup.sh
-bash setup_all.sh
+# dnf install stow
+```
+ubuntu/debina
+```shell
+# apt install stow
+```
+3. go
+```shell
+
+./shell_setup.sh
+./setup_all.sh
 ```
