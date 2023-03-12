@@ -34,9 +34,13 @@ fedora
 ```shell
 # dnf install stow
 ```
-ubuntu/debina
+ubuntu/debian
 ```shell
 # apt install stow
+```
+mac
+```shell
+#  brew install stow
 ```
 3. go
 ```shell
