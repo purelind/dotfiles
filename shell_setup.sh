@@ -71,7 +71,7 @@ if [[ ! -d $HOME/.zprezto ]]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
     setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/'^README.md(.N)'; do
     # -L returns true if the "file" exists and is a symbolic link (the linked file may or may not exist). 
       if [ -L "${ZDOTDIR:-$HOME}/.${rcfile:t}" ]; then
         echo "remove softlink ${ZDOTDIR:-$HOME}/.${rcfile:t}"
