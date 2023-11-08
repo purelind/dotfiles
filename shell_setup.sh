@@ -71,7 +71,7 @@ if [[ ! -d $HOME/.zprezto ]]; then
     git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 
     setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+    for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/'^README.md(.N)'; do
     # -L returns true if the "file" exists and is a symbolic link (the linked file may or may not exist). 
       if [ -L "${ZDOTDIR:-$HOME}/.${rcfile:t}" ]; then
         echo "remove softlink ${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -124,10 +124,9 @@ else
     if [[ $machine == "Mac" ]] {
         brew install nvim
     } else {
-        # curl -LO https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-macos.tar.gz
-        # tar xzvf nvim-macos.tar.gz
-        # cp ./nvim-osx64/bin/nvim nvim
-        # chmod u+x nvim
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+        chmod u+x nvim.appimage
+        mv nvim.appimage nvim
     }
     cd -
 fi
@@ -162,18 +161,50 @@ if [[ ! -d $HOME/.rustup ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-for crate in bat fd-find ripgrep exa tealdeer procs ytop hyperfine bandwhich
+for crate in bat fd-find ripgrep tealdeer procs ytop hyperfine bandwhich
 do
     $HOME/.cargo/bin/cargo install $crate
 done
+# workaroud for exa
+# cargo install exa failed in debian-11  (20220522)
+# issue : https://github.com/ogham/exa/issues/1068
+for crate in exa
+do
+    $HOME/.cargo/bin/rustup override set 1.56.1
+    $HOME/.cargo/bin/cargo install $crate
+    $HOME/.cargo/bin/rustup override unset
+done
+
 
 #######################
 # GO
 #######################
-if [[ ! -d $HOME/.go ]]; then
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo ${machine}
+if [[ $machine == "Linux" ]]; then
+    if [[ ! -d $HOME/.go ]]; then
     mkdir -p $HOME/.go
-    curl -LO https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
-    tar -C $HOME/.go -xzf go1.17.6.linux-amd64.tar.gz --strip-components=1
-    rm -f go1.17.6.linux-amd64.tar.gz
-
+    curl -LO https://go.dev/dl/go1.17.10.linux-amd64.tar.gz
+    tar -C $HOME/.go -xzf go1.17.10.linux-amd64.tar.gz --strip-components=1
+    rm -f go1.17.10.linux-amd64.tar.gz
+    fi
+    if [[ ! -d $HOME/sdk/go1.18.2 ]]; then
+        mkdir -p $HOME/sdk/go1.18.2
+        curl -LO https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
+        tar -C $HOME/sdk/go1.18.2 -xzf go1.18.2.linux-amd64.tar.gz --strip-components=1
+        rm -f go1.18.2.linux-amd64.tar.gz
+    fi
+    if [[ ! -d $HOME/sdk/go1.16.15 ]]; then
+        mkdir -p $HOME/sdk/go1.16.15
+        curl -LO https://go.dev/dl/go1.16.15.linux-amd64.tar.gz
+        tar -C $HOME/sdk/go1.18.2 -xzf go1.16.15.linux-amd64.tar.gz --strip-components=1
+        rm -f go1.16.15.linux-amd64.tar.gz
+    fi
 fi
