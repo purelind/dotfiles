@@ -46,12 +46,6 @@ if [[ ! -f $HOME/.fzf/bin/fzf ]]; then
     yes | $HOME/.fzf/install
 fi
 
-# DIFF-SO-FANCY
-if [[ ! -f $HOME/bin/diff-so-fancy ]]; then
-    curl -o $HOME/bin/diff-so-fancy https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
-    chmod +x $HOME/bin/diff-so-fancy
-fi
-
 
 #######################
 # TMUX
@@ -72,7 +66,7 @@ if [[ ! -d $HOME/.zprezto ]]; then
 
     setopt EXTENDED_GLOB
     for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/'^README.md(.N)'; do
-    # -L returns true if the "file" exists and is a symbolic link (the linked file may or may not exist). 
+    # -L returns true if the "file" exists and is a symbolic link (the linked file may or may not exist).
       if [ -L "${ZDOTDIR:-$HOME}/.${rcfile:t}" ]; then
         echo "remove softlink ${ZDOTDIR:-$HOME}/.${rcfile:t}"
         rm -f "${ZDOTDIR:-$HOME}/.${rcfile:t}"
@@ -86,7 +80,7 @@ fi
 cd $HOME/.zprezto
 git pull
 git submodule update --init --recursive
-cd - 
+cd -
 
 mkdir -p $HOME/.zsh
 
@@ -121,15 +115,16 @@ else
     mkdir -p $NVIM/bin
     cd $NVIM/bin
 
-    if [[ $machine == "Mac" ]] {
+    if [[ $machine == "Mac" ]]; then
         brew install nvim
-    } else {
+    else
         curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
         chmod u+x nvim.appimage
         mv nvim.appimage nvim
-    }
+    fi
     cd -
 fi
+
 
 # Create Python3 environment
 if [[ ! -d $NVIM/py3 ]]; then
@@ -153,6 +148,13 @@ if [[ ! -d $NVIM/node ]]; then
     npm install -g neovim
 fi
 
+
+# DIFF-SO-FANCY
+if [[ ! -f $NVIM/node/bin/diff-so-fancy ]]; then
+    npm install -g  diff-so-fancy
+fi
+
+
 #######################
 # RUST
 #######################
@@ -165,12 +167,13 @@ for crate in bat fd-find ripgrep tealdeer procs ytop hyperfine bandwhich
 do
     $HOME/.cargo/bin/cargo install $crate
 done
+
 # workaroud for exa
 # cargo install exa failed in debian-11  (20220522)
 # issue : https://github.com/ogham/exa/issues/1068
 for crate in exa
 do
-    $HOME/.cargo/bin/rustup override set 1.56.1
+    $HOME/.cargo/bin/rustup override set 1.66.1
     $HOME/.cargo/bin/cargo install $crate
     $HOME/.cargo/bin/rustup override unset
 done
