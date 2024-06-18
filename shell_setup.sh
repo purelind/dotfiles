@@ -163,7 +163,7 @@ if [[ ! -d $HOME/.rustup ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 fi
 
-for crate in bat fd-find ripgrep tealdeer procs ytop hyperfine bandwhich
+for crate in bat fd-find ripgrep tealdeer procs ytop hyperfine bandwhich jnv
 do
     $HOME/.cargo/bin/cargo install $crate
 done
