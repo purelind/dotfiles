@@ -34,6 +34,10 @@ Some base tools
   ```shell
   brew install readline xz
   ```
+* iterm2
+  1. increase the cursor speed in terminal  https://stackoverflow.com/questions/4489885/how-can-i-increase-the-cursor-speed-in-terminal
+     System Preferences => Keyboard => increase Key Repeat Rate
+  
 
 
 
