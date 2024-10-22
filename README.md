@@ -48,3 +48,12 @@ mac
 ./shell_setup.sh
 ./setup_all.sh
 ```
+
+
+### new
+install gpg2
+install rvm
+install new ruby version
+install cocoapods
+* 使用 asdf 管理部分环境
+
