@@ -108,6 +108,9 @@ fi
 
 export PATH=/Users/mori/.tiup/bin:$PATH
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
 
 eval "$(github-copilot-cli alias -- "$0")"
 
@@ -118,3 +121,9 @@ eval "$(pyenv init -)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+eval "$(rbenv init -)"
+
+[[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"

@@ -141,7 +141,7 @@ fi
 if [[ ! -d $NVIM/node ]]; then
     mkdir -p $NVIM/node
     NODE_SCRIPT=/tmp/install-node.sh
-    curl -sL install-node.now.sh/v16.2.0 -o $NODE_SCRIPT
+    curl -sL install-node.now.sh/v20.11.1 -o $NODE_SCRIPT
     chmod +x $NODE_SCRIPT
     PREFIX=$NVIM/node $NODE_SCRIPT -y
     PATH="$NVIM/node/bin:$PATH"
