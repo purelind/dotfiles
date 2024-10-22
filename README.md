@@ -17,6 +17,7 @@ Purelind dotfile (MacOS & Linux)
 * Rime
 
 * Vscode
+* Iterm2
 
   
 
@@ -24,6 +25,19 @@ Purelind dotfile (MacOS & Linux)
 
 其中大部分配置来源于 [Jose Javier Gonzalez dotfiles](https://github.com/jjgo/dotfiles)
 
+
+Some base tools
+* brew
+* stow
+* pyenv
+* others lib
+  ```shell
+  brew install readline xz
+  ```
+* iterm2
+  1. increase the cursor speed in terminal  https://stackoverflow.com/questions/4489885/how-can-i-increase-the-cursor-speed-in-terminal
+     System Preferences => Keyboard => increase Key Repeat Rate
+  
 
 
 
