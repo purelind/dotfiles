@@ -127,9 +127,7 @@ Plug 'junegunn/limelight.vim'          " Focus on current paragraph
 Plug 'rhysd/vim-grammarous'            " GrammarCheck using LanguageTool
 Plug 'ron89/thesaurus_query.vim'       " Synonym query
 
-" Other
-Plug 'wakatime/vim-wakatime'           " Wakatime time tracking
-Plug 'ihsanturk/neuron.vim'            " For neuron Zettelkasten
+" Other:
 Plug 'liuchengxu/vim-which-key'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
