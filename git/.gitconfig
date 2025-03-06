@@ -50,3 +50,5 @@
     smudge = git media smudge %f
 [init]
 	defaultBranch = main
+[http]
+	proxy = http://127.0.0.1:8888
