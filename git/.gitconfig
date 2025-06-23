@@ -50,5 +50,7 @@
     smudge = git media smudge %f
 [init]
 	defaultBranch = main
-[http]
-	proxy = http://127.0.0.1:8888
+[http "https://github.com"]
+	proxy = socks5://127.0.0.1:8889
+[https "https://github.com"]
+	proxy = socks5://127.0.0.1:8889
