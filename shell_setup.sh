@@ -138,14 +138,52 @@ if [[ ! -d $NVIM/py3 ]]; then
 fi
 
 # Create node env
-if [[ ! -d $NVIM/node ]]; then
+# To upgrade Node.js version:
+# 1. Change NODE_VERSION to desired version
+# 2. Run the script normally, it will auto-upgrade
+# 3. Or set FORCE_NODE_REINSTALL=true to force reinstall: FORCE_NODE_REINSTALL=true ./shell_setup.sh
+NODE_VERSION="22.12.0"
+FORCE_NODE_REINSTALL=${FORCE_NODE_REINSTALL:-false}
+
+function install_node() {
+    echo "Installing Node.js v$NODE_VERSION..."
     mkdir -p $NVIM/node
     NODE_SCRIPT=/tmp/install-node.sh
-    curl -sL install-node.now.sh/v20.18.0 -o $NODE_SCRIPT
+    curl -sL install-node.now.sh/v$NODE_VERSION -o $NODE_SCRIPT
     chmod +x $NODE_SCRIPT
     PREFIX=$NVIM/node $NODE_SCRIPT -y
     PATH="$NVIM/node/bin:$PATH"
     npm install -g neovim
+    echo "Node.js v$NODE_VERSION installed successfully"
+}
+
+function get_installed_node_version() {
+    if [[ -f $NVIM/node/bin/node ]]; then
+        $NVIM/node/bin/node --version 2>/dev/null | sed 's/^v//' || echo ""
+    else
+        echo ""
+    fi
+}
+
+# Check if we need to install or upgrade Node.js
+INSTALLED_VERSION=$(get_installed_node_version)
+
+if [[ "$FORCE_NODE_REINSTALL" == "true" ]]; then
+    echo "Force reinstall enabled, removing existing Node.js installation..."
+    rm -rf $NVIM/node
+    install_node
+elif [[ -z "$INSTALLED_VERSION" ]]; then
+    echo "Node.js not found, installing..."
+    install_node
+elif [[ "$INSTALLED_VERSION" != "$NODE_VERSION" ]]; then
+    echo "Current Node.js version: v$INSTALLED_VERSION"
+    echo "Target Node.js version: v$NODE_VERSION"
+    echo "Upgrading Node.js..."
+    rm -rf $NVIM/node
+    install_node
+else
+    echo "Node.js v$INSTALLED_VERSION is already installed and up-to-date"
+    PATH="$NVIM/node/bin:$PATH"
 fi
 
 

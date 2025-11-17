@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -116,6 +118,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
@@ -125,3 +129,27 @@ export PATH="$PATH:$HOME/.rvm/bin"
 eval "$(rbenv init -)"
 
 [[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/mori/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mori/.google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/mori/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mori/.google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/Users/mori/.bun/_bun" ] && source "/Users/mori/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export AWS_PROFILE=0414-sso
+
+alias claude="/Users/mori/.local/bin/claude"
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

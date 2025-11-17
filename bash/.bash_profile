@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.pre.bash"
 # Some OSes like Ubuntu/Mac expect bash_profile
 # Redirect to bashrc
 if [ -f ~/.bashrc ]; then
@@ -12,5 +14,16 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+
+if [ -s "$HOME/.asdf/asdf.sh" ]; then
+    . "$HOME/.asdf/asdf.sh"
+fi
+if [ -s "$HOME/.asdf/completions/asdf.bash" ]; then
+    . "$HOME/.asdf/completions/asdf.bash"
+fi
+
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_profile.post.bash"
+
+. "$HOME/.atuin/bin/env"
