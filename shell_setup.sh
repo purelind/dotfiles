@@ -138,20 +138,32 @@ if [[ ! -d $NVIM/py3 ]]; then
 fi
 
 # Create node env
-if [[ ! -d $NVIM/node ]]; then
+NODE_VERSION="v24.13.0"
+CURRENT_NODE=$($NVIM/node/bin/node --version 2>/dev/null || echo "none")
+
+if [[ "$CURRENT_NODE" != "$NODE_VERSION" ]]; then
+    # Backup global packages before upgrade
+    if [[ -d $NVIM/node ]]; then
+        echo "Upgrading Node from $CURRENT_NODE to $NODE_VERSION"
+        GLOBAL_PKGS=$($NVIM/node/bin/npm list -g --depth=0 --parseable 2>/dev/null | tail -n +2 | sed 's|.*/||' | grep -v "^npm$" || true)
+        rm -rf $NVIM/node
+    fi
+
+    # Install node
     mkdir -p $NVIM/node
-    NODE_SCRIPT=/tmp/install-node.sh
-    curl -sL install-node.now.sh/v20.18.0 -o $NODE_SCRIPT
-    chmod +x $NODE_SCRIPT
-    PREFIX=$NVIM/node $NODE_SCRIPT -y
+    curl -sL install-node.now.sh/$NODE_VERSION -o /tmp/install-node.sh
+    chmod +x /tmp/install-node.sh
+    PREFIX=$NVIM/node /tmp/install-node.sh -y
     PATH="$NVIM/node/bin:$PATH"
     npm install -g neovim
-fi
 
+    # Restore global packages
+    [[ -n "${GLOBAL_PKGS:-}" ]] && echo "$GLOBAL_PKGS" | xargs npm install -g
+fi
 
 # DIFF-SO-FANCY
 if [[ ! -f $NVIM/node/bin/diff-so-fancy ]]; then
-    npm install -g  diff-so-fancy
+    npm install -g diff-so-fancy
 fi
 
 
