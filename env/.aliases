@@ -49,6 +49,8 @@ function gD(){
     git diff $@ | ydiff
 }
 
+alias op1p='/opt/homebrew/bin/op' # 1password cli
+
 ## Jupyter
 alias jc="jupyter console"
 alias jco="jupyter nbconvert"
