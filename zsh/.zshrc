@@ -124,4 +124,11 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 export PATH="$PATH:$HOME/.rvm/bin"
 eval "$(rbenv init -)"
 
-[[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"
+# [[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"
+
+# bun completions
+[ -s "/Users/purelind/.bun/_bun" ] && source "/Users/purelind/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
