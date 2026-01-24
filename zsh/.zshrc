@@ -135,3 +135,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/opt/homebrew/opt/mysql-client@8.4/bin:$PATH"
 
 alias claude="/Users/purelind/.claude/local/claude"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
