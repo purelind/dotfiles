@@ -1,73 +1,44 @@
-Purelind dotfile (MacOS & Linux)
+# Purelind Dotfiles (macOS & Linux)
 
-目前支持以下常用配置：
+## Supported Configurations
 
-* Bash
-
-* Zsh
-
+* Bash / Zsh
 * Git
+* Tmux
+* Vim / Neovim
+* Rime input method
+* Iterm2 / Alacritty
 
-* Tumux
+Inspired by [Jose Javier Gonzalez dotfiles](https://github.com/jjgo/dotfiles)
 
-* Vim
+## Dependencies
 
-* Custom scripts
+```bash
+# macOS
+brew install stow readline xz
 
-* Rime
+# Fedora
+dnf install stow
 
-* Vscode
-* Iterm2
-
-  
-
-
-
-其中大部分配置来源于 [Jose Javier Gonzalez dotfiles](https://github.com/jjgo/dotfiles)
-
-
-Some base tools
-* brew
-* stow
-* pyenv
-* others lib
-  ```shell
-  brew install readline xz
-  ```
-* iterm2
-  1. increase the cursor speed in terminal  https://stackoverflow.com/questions/4489885/how-can-i-increase-the-cursor-speed-in-terminal
-     System Preferences => Keyboard => increase Key Repeat Rate
-  
-
-
-
-Usage
-1. install `zsh`, set zsh as your default shell
-2. install 'stow'
-fedora
-```shell
-# dnf install stow
+# Ubuntu/Debian
+apt install stow
 ```
-ubuntu/debian
-```shell
-# apt install stow
-```
-mac
-```shell
-#  brew install stow
-```
-3. go
-```shell
 
+## Installation
+
+```bash
+# 1. Install zsh and set as default shell
+# 2. Run setup scripts
 ./shell_setup.sh
 ./setup_all.sh
 ```
 
+## Files
 
-### new
-install gpg2
-install rvm
-install new ruby version
-install cocoapods
-* 使用 asdf 管理部分环境
+- `shell_setup.sh`: Install dev tools (Node, Rust, Neovim, etc.)
+- `setup_all.sh`: Create config symlinks
+- `AGENTS.md`: AI assistant guidelines
 
+## Tips
+
+Increase terminal cursor speed: System Preferences → Keyboard → Key Repeat Rate
