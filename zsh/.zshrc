@@ -137,3 +137,6 @@ export PATH="/opt/homebrew/opt/mysql-client@8.4/bin:$PATH"
 alias claude="/Users/purelind/.claude/local/claude"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by Antigravity
+export PATH="/Users/purelind/.antigravity/antigravity/bin:$PATH"
