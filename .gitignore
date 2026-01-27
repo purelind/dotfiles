@@ -12,3 +12,4 @@ rime/user.yaml
 
 # user db
 rime/*.userdb
+.claude/
