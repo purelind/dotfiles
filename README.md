@@ -7,7 +7,7 @@
 * Tmux
 * Vim / Neovim
 * Rime input method
-* Iterm2 / Alacritty
+* Kitty
 
 Inspired by [Jose Javier Gonzalez dotfiles](https://github.com/jjgo/dotfiles)
 

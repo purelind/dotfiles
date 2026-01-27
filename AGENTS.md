@@ -42,10 +42,12 @@
 ├── zsh/        # Zsh config
 ├── env/        # Environment variables and aliases
 ├── git/        # Git config
+├── kitty/      # Kitty terminal config
 ├── tmux/       # Tmux config
 ├── vim/        # Vim/Neovim config
 ├── rime/       # Rime input method config
-└── python/     # Python related config
+├── python/     # Python related config
+└── archive/    # Deprecated configs (e.g., alacritty)
 ```
 
 ## Common Commands
