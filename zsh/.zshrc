@@ -130,16 +130,16 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 export PATH="$PATH:$HOME/.rvm/bin"
 eval "$(rbenv init -)"
 
-[[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"
+# [[ -s "/Users/purelind/.gvm/scripts/gvm" ]] && source "/Users/purelind/.gvm/scripts/gvm"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/mori/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mori/.google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/.google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/.google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/mori/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mori/.google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/.google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/.google-cloud-sdk/completion.zsh.inc"; fi
 
 # bun completions
-[ -s "/Users/mori/.bun/_bun" ] && source "/Users/mori/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -147,7 +147,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 export AWS_PROFILE=0414-sso
 
-alias claude="/Users/mori/.local/bin/claude"
+alias claude="$HOME/.local/bin/claude"
 
 . "$HOME/.atuin/bin/env"
 
@@ -159,7 +159,7 @@ eval "$(atuin init zsh)"
 [[ -n ${__ATUIN_PRINTF_ALIAS:-} ]] && alias ${__ATUIN_PRINTF_ALIAS} && unset __ATUIN_PRINTF_ALIAS
 
 # Added by Antigravity
-export PATH="/Users/mori/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 
 # Kiro CLI post block. Keep at the bottom of this file.
