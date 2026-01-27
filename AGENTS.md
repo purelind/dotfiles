@@ -35,6 +35,13 @@
 
 - All comments in scripts must be written in **English**
 
+### Python Configuration
+
+- Python is managed by **pyenv** (not installed by this dotfiles)
+- Install pyenv manually: `brew install pyenv` (macOS) or follow [pyenv docs](https://github.com/pyenv/pyenv)
+- Recommended version: Python 3.12+
+- The script creates a venv at `~/.neovim/py3` using the active pyenv Python
+
 ## Directory Structure
 
 ```

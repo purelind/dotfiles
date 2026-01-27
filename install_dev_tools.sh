@@ -126,7 +126,11 @@ else
 fi
 
 
-# Create Python3 environment
+# Create Python3 environment (requires pyenv or system python3)
+if ! command -v python3 > /dev/null; then
+    echo "WARNING: python3 not found. Install via pyenv: brew install pyenv && pyenv install 3.12"
+fi
+
 if [[ ! -d $NVIM/py3 ]]; then
     python3 -m venv $NVIM/py3
     PIP=$NVIM/py3/bin/pip
