@@ -20,6 +20,7 @@ Thumbs.db
 
 # Application specific files
 venv
+.venv
 node_modules
 .sass-cache
 
@@ -32,3 +33,6 @@ node_modules
 *.iml
 
 .gradle
+
+.gemini-clipboard/
+.playwright-mcp

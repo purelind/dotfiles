@@ -1,5 +1,7 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -147,9 +149,18 @@ export AWS_PROFILE=0414-sso
 
 alias claude="/Users/mori/.local/bin/claude"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
-
 . "$HOME/.atuin/bin/env"
 
+# Temporarily remove printf alias while loading atuin so hooks use builtin printf.
+if __ATUIN_PRINTF_ALIAS=$(alias printf 2>/dev/null); then
+  unalias printf
+fi
 eval "$(atuin init zsh)"
+[[ -n ${__ATUIN_PRINTF_ALIAS:-} ]] && alias ${__ATUIN_PRINTF_ALIAS} && unset __ATUIN_PRINTF_ALIAS
+
+# Added by Antigravity
+export PATH="/Users/mori/.antigravity/antigravity/bin:$PATH"
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"

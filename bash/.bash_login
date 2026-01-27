@@ -1,8 +1,11 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_login.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_login.pre.bash"
+
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_login.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_login.pre.bash"
+
 . "$HOME/.cargo/env"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/bash_login.post.bash" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/bash_login.post.bash"
-
 . "$HOME/.atuin/bin/env"
+
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_login.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_login.post.bash"
