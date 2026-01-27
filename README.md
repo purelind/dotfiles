@@ -29,14 +29,14 @@ apt install stow
 ```bash
 # 1. Install zsh and set as default shell
 # 2. Run setup scripts
-./shell_setup.sh
-./setup_all.sh
+./install_dev_tools.sh
+./stow_dotfiles.sh
 ```
 
 ## Files
 
-- `shell_setup.sh`: Install dev tools (Node, Rust, Neovim, etc.)
-- `setup_all.sh`: Create config symlinks
+- `install_dev_tools.sh`: Install dev tools (Node, Rust, Neovim, etc.)
+- `stow_dotfiles.sh`: Create config symlinks
 - `AGENTS.md`: AI assistant guidelines
 
 ## Tips
