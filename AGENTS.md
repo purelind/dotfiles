@@ -17,8 +17,23 @@
 
 ### Cross-platform Notes
 
+- **Primary target: macOS; also support Linux (Fedora & Ubuntu)**
+- Every script change must be tested/considered for all three platforms
 - Use `sed 's|.*/||'` instead of `xargs basename` (BSD/GNU compatible)
-- Avoid platform-specific command options
+- Prefer POSIX-compatible commands; when platform-specific logic is unavoidable, use `uname` or `$OSTYPE` to branch
+- On Linux, account for differences between Fedora (`dnf`) and Ubuntu (`apt`)
+- Avoid platform-specific command flags without a compatibility check
+
+### Path & Portability Rules
+
+- **Never hardcode user home paths** (e.g., `/Users/mori/...` or `/home/mori/...`)
+- Always use `$HOME`, `~`, or dynamically resolved paths (`$(whoami)`, `$(dirname "$0")`, etc.)
+- The user may run these dotfiles on multiple Mac machines with different usernames — scripts must work regardless of the local username
+- Use `$HOME` for config destinations; use script-relative paths (e.g., `DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"`) for source references
+
+### Code Style
+
+- All comments in scripts must be written in **English**
 
 ## Directory Structure
 
