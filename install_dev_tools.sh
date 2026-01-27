@@ -194,32 +194,36 @@ done
 #######################
 # GO
 #######################
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    *)          machine="UNKNOWN:${unameOut}"
+
+GO_VERSION="1.25.6"
+GO_INSTALL_DIR="$HOME/.go"
+
+# Detect OS and architecture
+case "$(uname -s)" in
+    Linux*)  GO_OS="linux" ;;
+    Darwin*) GO_OS="darwin" ;;
+    *)       echo "Unsupported OS"; exit 1 ;;
 esac
-echo ${machine}
-if [[ $machine == "Linux" ]]; then
-    if [[ ! -d $HOME/.go ]]; then
-    mkdir -p $HOME/.go
-    curl -LO https://go.dev/dl/go1.17.10.linux-amd64.tar.gz
-    tar -C $HOME/.go -xzf go1.17.10.linux-amd64.tar.gz --strip-components=1
-    rm -f go1.17.10.linux-amd64.tar.gz
-    fi
-    if [[ ! -d $HOME/sdk/go1.18.2 ]]; then
-        mkdir -p $HOME/sdk/go1.18.2
-        curl -LO https://go.dev/dl/go1.18.2.linux-amd64.tar.gz
-        tar -C $HOME/sdk/go1.18.2 -xzf go1.18.2.linux-amd64.tar.gz --strip-components=1
-        rm -f go1.18.2.linux-amd64.tar.gz
-    fi
-    if [[ ! -d $HOME/sdk/go1.16.15 ]]; then
-        mkdir -p $HOME/sdk/go1.16.15
-        curl -LO https://go.dev/dl/go1.16.15.linux-amd64.tar.gz
-        tar -C $HOME/sdk/go1.18.2 -xzf go1.16.15.linux-amd64.tar.gz --strip-components=1
-        rm -f go1.16.15.linux-amd64.tar.gz
-    fi
+
+case "$(uname -m)" in
+    x86_64)  GO_ARCH="amd64" ;;
+    arm64|aarch64) GO_ARCH="arm64" ;;
+    *)       echo "Unsupported architecture"; exit 1 ;;
+esac
+
+CURRENT_GO=$($GO_INSTALL_DIR/bin/go version 2>/dev/null | grep -oE 'go[0-9]+\.[0-9]+\.[0-9]+' | sed 's/go//' || echo "none")
+
+if [[ "$CURRENT_GO" != "$GO_VERSION" ]]; then
+    echo "Installing Go $GO_VERSION (current: $CURRENT_GO)"
+    rm -rf "$GO_INSTALL_DIR"
+    mkdir -p "$GO_INSTALL_DIR"
+    
+    GO_TARBALL="go${GO_VERSION}.${GO_OS}-${GO_ARCH}.tar.gz"
+    curl -LO "https://go.dev/dl/${GO_TARBALL}"
+    tar -C "$GO_INSTALL_DIR" -xzf "$GO_TARBALL" --strip-components=1
+    rm -f "$GO_TARBALL"
+    
+    echo "Go $GO_VERSION installed to $GO_INSTALL_DIR"
+else
+    echo "Go $GO_VERSION already installed"
 fi
