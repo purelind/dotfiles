@@ -231,3 +231,14 @@ if [[ "$CURRENT_GO" != "$GO_VERSION" ]]; then
 else
     echo "Go $GO_VERSION already installed"
 fi
+
+
+#######################
+# PNPM
+#######################
+
+if ! command -v pnpm > /dev/null; then
+    curl -fsSL https://get.pnpm.io/install.sh | sh -
+else
+    echo "pnpm already installed: $(pnpm --version)"
+fi
