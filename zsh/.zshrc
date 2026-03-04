@@ -110,15 +110,8 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
-export PATH=/Users/mori/.tiup/bin:$PATH
-
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -161,9 +154,6 @@ eval "$(atuin init zsh)"
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
-
-# Kiro CLI post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 
 # pnpm
 if [[ "$(uname)" == "Darwin" ]]; then
