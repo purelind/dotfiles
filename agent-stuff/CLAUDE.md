@@ -13,6 +13,7 @@ The following skills are available at `~/.claude/skills/`. When a task matches t
 | **tmux** | Interactive CLI sessions (Python REPL, gdb/lldb debugging, etc.) | `~/.claude/skills/tmux/SKILL.md` |
 | **improve-skill** | Analyzing sessions to create or improve skills | `~/.claude/skills/improve-skill/SKILL.md` |
 | **codecliusage** | Query Claude Code / Codex token usage and costs | `~/.claude/skills/codecliusage/SKILL.md` |
+| **review-pr** | Structured code review for GitHub Pull Requests | `~/.claude/skills/review-pr/SKILL.md` |
 
 ### Usage Pattern
 
