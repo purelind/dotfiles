@@ -1,7 +1,7 @@
 ---
 description: "Perform structured code review on GitHub Pull Requests"
 allowed-tools: Bash, Read, Glob, Grep, Agent
-argument-hint: <PR_ID|owner/repo#ID|URL> [--comment|--review]
+argument-hint: [PR_ID|owner/repo#ID|URL] [--comment|--review]
 ---
 
 # Code Review for GitHub Pull Request

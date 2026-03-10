@@ -10,13 +10,14 @@ description: "Perform structured code review on GitHub Pull Requests. Checks out
 ## 使用方式
 
 ```
-/review-pr <PR_REF> [--comment|--review]
+/review-pr [PR_REF] [--comment|--review]
 ```
 
-`PR_REF` 支持以下格式（自动识别）：
+`PR_REF` 可选，支持以下格式（自动识别）：
 
 | 格式 | 示例 | 说明 |
 |------|------|------|
+| （空） | `/review-pr` | 自动检测当前分支关联的 PR |
 | PR 编号 | `123` | 使用当前目录 git remote 推断仓库 |
 | `owner/repo#ID` | `facebook/react#1234` | 显式指定仓库 |
 | GitHub URL | `https://github.com/owner/repo/pull/123` | 从 URL 解析 |
@@ -36,13 +37,21 @@ description: "Perform structured code review on GitHub Pull Requests. Checks out
 使用脚本解析输入：
 
 ```bash
+# 自动检测当前分支的 PR
+PARSED=$(./scripts/parse-pr-ref.sh)
+# stderr 输出: Auto-detected PR #123 (OPEN) for branch 'feat/xxx'
+#               https://github.com/owner/repo/pull/123
+
+# 或显式指定
 PARSED=$(./scripts/parse-pr-ref.sh "$PR_REF")
-# 输出示例: {"repo":"owner/repo","pr_id":"123","repo_flag":"--repo owner/repo"}
-# 纯数字输入: {"repo":"","pr_id":"123","repo_flag":""}
+# 输出示例: {"repo":"owner/repo","pr_id":"123","repo_flag":"--repo owner/repo","branch":""}
+# 纯数字输入: {"repo":"","pr_id":"123","repo_flag":"","branch":""}
+# 自动检测: {"repo":"","pr_id":"123","repo_flag":"","branch":"feat/xxx"}
 ```
 
-- 纯数字：`repo` 为空，`gh` 从当前目录的 git remote 自动推断仓库。如果当前目录不是目标仓库的 clone，需要提示用户补充仓库信息。
-- `owner/repo#ID` 或 GitHub URL：`repo_flag` 自动填充 `--repo owner/repo`。
+- **空参数**：自动通过 `gh pr view` 查找当前分支关联的 PR。如果当前分支没有 PR，脚本会报错并提示。
+- **纯数字**：`repo` 为空，`gh` 从当前目录的 git remote 自动推断仓库。
+- **`owner/repo#ID` 或 GitHub URL**：`repo_flag` 自动填充 `--repo owner/repo`。
 
 ### 第二步：获取 PR 信息
 
